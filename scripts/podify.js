@@ -104,6 +104,13 @@ module.exports = function (context) {
 
         if (!podified || !_.isEqual(newPods, currentPods)) {
 
+            for (podId in newPods.pods) {
+                 pod = newPods.pods[podId];
+                 if (pod.source){
+                     podfileContents.push("source "+"'"+pod.source+"'");
+                 }
+             }
+
             podfileContents.push("platform :ios, '" + iosMinVersion + "'");
             if (useFrameworks === 'true') {
                 podfileContents.push("use_frameworks!");
